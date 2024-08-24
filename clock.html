@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="stop">STOP</button>
+    <div class="clock">
+        <p class="show-state">오전</p>
+        <span class="show-hr"></span> :
+        <span class="show-min"></span> :
+        <span class="show-sec"></span>
+    </div>
+
+    <div class="date">
+        <span class="show-year"></span>년
+        <span class="show-mon"></span>월
+        <span class="show-date"></span>일
+        <span class="show-day"></span>요일
+    </div>
+    <script>
+
+        let dateInfo = new Date();
+        
+        let nowYear = dateInfo.getFullYear(),
+            nowMon = dateInfo.getMonth(),
+            nowDate = dateInfo.getDate(),
+            nowDay = dateInfo.getDay();
+        let showYear = document.querySelector('.show-year'),
+            showMon = document.querySelector('.show-mon'),
+            showDate = document.querySelector('.show-date'),
+            showDay = document.querySelector('.show-day');
+
+        let days = ['일','월','화','수','목','금','토']
+
+            showYear.innerText = nowYear;
+            showMon.innerText = nowMon;
+            showDate.innerText = nowDate;
+            showDay.innerText = days[nowDay];
+        
+
+        setInterval(function(){
+
+        let now = new Date();
+
+        console.log(now);
+        console.dir(now);
+
+        let hr = now.getHours(),
+            min = now.getMinutes(),
+            sec = now.getSeconds();
+        console.log(hr, min, sec);
+
+        let showHr = document.querySelector('.show-hr'),
+            showMin = document.querySelector('.show-min'),
+            showSec = document.querySelector('.show-sec');
+            showState = document.querySelector('.show-state');
+
+            if(hr >= 0 && hr <=11){
+                showState.innerText = '오전';
+                if(hr === 0){
+                    hr  =12;
+                }
+
+            }else {
+                showState.innerText = '오후';
+                if(hr > 12){
+                    hr = hr-12;
+                }
+            }
+
+            
+            if(hr < 10 ) {
+                hr = '0'+ hr;
+            }
+            if(min < 10 ) {
+                min = '0'+ min;
+            }
+            if(sec < 10 ) {
+                sec = '0'+ sec;
+            }
+
+            showHr.innerText = hr;
+            showMin.innerText = min;
+            showSec.innerText = sec;
+
+         
+        },500);
+        
+    </script>
+</body>
+</html>
