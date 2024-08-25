@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin : 0;
+            padding : 0;
+        }
+        a{
+            color : inherit;
+        }
+        ul{
+            list-style : none;
+        }
+        .wrap{
+            background-color : paleturquoise;
+            height: 100vh;
+        }
+        
+        .show-current-time{
+            padding-top : 40px;
+            font-family : 'pretendard';
+            color : #333;            
+        }
+        .calender{
+            display : flex;
+            justify-content: center;
+        }
+        .calender strong{
+            font-weight : bolder;
+        }
+        .calender span{
+            margin-right : 20px;
+        }
+        .clock{
+            display : flex;
+            justify-content: center;
+            margin-top : 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+      <div class="show-current-time">
+            <div class = "calender">
+                <strong class="show-year"></strong>
+                <span>년</span>
+                <strong class="show-mon"></strong>
+                <span>월</span>
+                <strong class="show-date"></strong>
+                <span>일</span>
+                <strong class="show-day"></strong>
+                <span>요일</span>
+            </div><!--calendar-->
+        
+            <div class="clock">
+                <strong class="current"></strong>
+                <strong class="show-time"></strong>
+                <strong class="show-hr"></strong>
+                <span class="blink">:</span>
+                <strong class="show-min"></strong>
+                <span class="blink">:</span>
+                <strong class="show-sec"></strong>
+            </div><!--clock-->
+
+        </div><!--show-current-time-->
+    </div><!--wrap-->
+    <script>
+        function clock(){
+            let now = new Date();
+
+            let nowYear = now.getFullYear(),
+                nowMon = now.getMonth(),
+                nowDate = now.getDate(),
+                nowDay = now.getDay();
+            
+            let showYear = document.querySelector('.show-year'),
+                showMon = document.querySelector('.show-mon'),
+                showDate = document.querySelector('.show-date'),
+                showDay = document.querySelector('.show-day');
+
+                let days = ['일','월','화','수','목','금','토']
+            
+                showYear.innerText = nowYear;
+                showMon.innerText = nowMon+1;
+                showDate.innerText = nowDate;
+                showDay.innerText = days[nowDay];
+
+            let nowHr = now.getHours(),
+                nowMin = now.getMinutes(),
+                nowSec = now.getSeconds();
+                nowTime = '오전';
+
+            let showHr = document.querySelector('.show-hr'),
+                showMin = document.querySelector('.show-min'),
+                showSec = document.querySelector('.show-sec');
+                showTime = document.querySelector('.show-time');
+
+                if(nowHr > 12){
+                    nowHr -= 12;
+                    nowTime = '오후';
+                }else if(nowHr == 0){
+                    nowHr = 12;
+                    nowTime = '오전';
+                }else{
+                    nowTime = '오전'
+                }
+
+
+                if(nowHr < 10){
+                    nowHr = '0' + nowHr;
+                }
+
+                if(nowMin < 10){
+                    nowMin = '0' + nowMin;
+                }
+
+                if(nowSec < 10){
+                    nowSec = '0' + nowSec;
+                }
+                
+                showHr.innerText = nowHr;
+                showMin.innerText = nowMin;
+                showSec.innerText = nowSec;
+                showTime.innerText = nowTime;
+
+                
+        } //동적 시계
+        clock();
+        
+        setInterval(clock,500);
+    </script>
+</body>
+</html>
